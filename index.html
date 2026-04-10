@@ -1,167 +1,77 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>node</title>
-  <style>
-    body {
-      margin: 0;
-      background: #040404;
-      color: #2bff88;
-      font-family: monospace;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }.topbar {
-  background: #0d0d0d;
-  color: #666;
-  padding: 8px 12px;
-  font-size: 0.75rem;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #111;
-}
-
-.terminal {
-  flex: 1;
-  padding: 15px;
-  overflow-y: auto;
-}
-
-.line { margin-bottom: 4px; }
-
-.dim { color: #1a5f3a; }
-
-.warn { color: #ffaa00; }
-
-.err { color: #ff4444; }
-
-.prompt::before { content: "> "; }
-
-input {
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #2bff88;
-  font-family: monospace;
-  width: 80%;
-}
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>International Philatelic Exchange (IPE)</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body><div class="topbar">
-  <div>NET://keepingkidssafe.node</div>
-  <div id="time"></div>
-</div><div class="terminal" id="terminal">
-  <div class="line">initializing node...</div>
-  <div class="line dim">routing traffic...</div>
-  <div class="line dim">checking filters...</div>
-  <div class="line warn">unverified endpoints detected</div>
-  <div class="line">_</div>
-</div><div class="line prompt" style="padding:10px;">
-  <input id="input" autofocus />
-</div><script>
-const terminal = document.getElementById("terminal");
-const input = document.getElementById("input");
+<body>
 
-function append(text, cls = "") {
-  const div = document.createElement("div");
-  div.className = "line " + cls;
-  div.textContent = text;
-  terminal.appendChild(div);
-  terminal.scrollTop = terminal.scrollHeight;
-}
+    <header>
+        <h1>International Philatelic Exchange</h1>
+        <nav>
+            <a href="#">Home</a> | <a href="#">Resources</a> | <a href="#">Forums</a> | <a href="#">Catalogs</a> | <a href="#">Member Login</a>
+        </nav>
+    </header>
 
-function processCommand(cmd) {
-  cmd = cmd.trim().toLowerCase();
+    <div class="container">
+        <main>
+            <h2>Latest Discussions</h2>
+            <div class="post">
+                <h3>1840 Penny Black: Variance in Gum Texture?</h3>
+                <p>Posted by <em>StampCollector42</em> - 2 hours ago</p>
+                <p>I've noticed a slight ripple in the adhesive of the 1840 series. Has anyone else seen this in the London prints, or is it environmental damage?</p>
+            </div>
+            <div class="post">
+                <h3>Tips for Safely Removing Hinges</h3>
+                <p>Posted by <em>DriftwoodLover</em> - 5 hours ago</p>
+                <p>Avoid using steam. I recommend a specialized solvent and a steady hand...</p>
+            </div>
+        </main>
 
-  if (cmd === "help") {
-    append("commands: status, scan, access, logs, clear");
-  }
+        <aside>
+            <div class="featured-box">
+                <h4>FEATURED ACQUISITION</h4>
+                <p>(Members Only)</p>
+                <!-- The "Impossible Stamp" -->
+                <div id="trigger-stamp" class="stamp-image">
+                    <div class="stamp-silhouette">
+                        <span class="shh-icon">🤫</span>
+                        <div class="stamp-text">SECRETA</div>
+                        <div class="stamp-year">19XX</div>
+                    </div>
+                </div>
+                <p class="caption">Item #404-B: "The Silent Messenger"</p>
+            </div>
+        </aside>
+    </div>
 
-  else if (cmd === "status") {
-    append("node: active");
-    append("protection layer: partial", "dim");
-    append("visibility: restricted", "dim");
-  }
+    <!-- Hidden portal container (starts invisible) -->
+    <div id="dark-portal" class="hidden">
+        <div class="access-box">
+            <h2>ACCESS GRANTED</h2>
+            <p>Enter Credentials for the Black Market Node</p>
+            <input type="password" placeholder="Keycode...">
+        </div>
+    </div>
 
-  else if (cmd === "scan") {
-    append("scanning environment...");
-    setTimeout(() => append("external signals detected", "warn"), 500);
-    setTimeout(() => append("some traffic cannot be classified", "dim"), 1200);
-  }
+    <script>
+        // The Hidden Logic: Hover for 5 seconds to trigger
+        const stamp = document.getElementById('trigger-stamp');
+        const portal = document.getElementById('dark-portal');
+        let hoverTimer;
 
-  else if (cmd === "logs") {
-    append("[log] request blocked");
-    append("[log] pattern mismatch", "dim");
-    append("[log] escalation prevented", "dim");
-  }
+        stamp.addEventListener('mouseenter', () => {
+            hoverTimer = setTimeout(() => {
+                portal.classList.add('visible');
+                console.log("The hero has found the backdoor.");
+            }, 5000); // 5 seconds hover
+        });
 
-  else if (cmd === "access") {
-    append("authorization required", "err");
-    append("hint: not all keys are visible", "dim");
-  }
-
-  else if (cmd === "clear") {
-    terminal.innerHTML = "";
-  }
-
-  else if (cmd === "protect") {
-    append("protection routines initializing...");
-    append("monitoring enabled", "dim");
-  }
-
-  else if (cmd === "children") {
-    append("dataset incomplete", "dim");
-    append("integrity check required", "warn");
-  }
-
-  else if (cmd === "") {
-    return;
-  }
-
-  else {
-    append("unrecognized input", "dim");
-  }
-}
-
-input.addEventListener("keydown", function(e) {
-  if (e.key === "Enter") {
-    append("> " + input.value);
-    processCommand(input.value);
-    input.value = "";
-  }
-});
-
-function updateTime() {
-  const now = new Date();
-  document.getElementById("time").textContent = now.toLocaleTimeString();
-}
-setInterval(updateTime, 1000);
-updateTime();
-
-// ambient system messages
-const messages = [
-  "filter adapting...",
-  "unknown request pattern",
-  "masking traffic",
-  "signal rerouted",
-  "watching..."
-];
-
-setInterval(() => {
-  if (Math.random() > 0.65) {
-    append(messages[Math.floor(Math.random() * messages.length)], "dim");
-  }
-}, 5000);
-
-// returning user behavior
-if (localStorage.getItem("visited")) {
-  append("returning session detected", "warn");
-} else {
-  localStorage.setItem("visited", "true");
-}
-
-console.log("node visibility limited");
-</script></body>
-  </html>
+        stamp.addEventListener('mouseleave', () => {
+            clearTimeout(hoverTimer);
+        });
+    </script>
+</body>
+</html>
