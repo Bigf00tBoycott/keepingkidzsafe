@@ -3,74 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>International Philatelic Exchange (IPE)</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Keeping Kidz Safe | Building Secure Communities</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
-        <h1>International Philatelic Exchange</h1>
-        <nav>
-            <a href="#">Home</a> | <a href="#">Resources</a> | <a href="#">Forums</a> | <a href="#">Catalogs</a> | <a href="#">Member Login</a>
-        </nav>
+        <div class="nav-container">
+            <div class="logo">KEEPING<span>KIDZ</span>SAFE</div>
+            <nav>
+                <a href="#">Our Mission</a>
+                <a href="#">Resources</a>
+                <a href="#">Safety Map</a>
+                <a href="#" class="donate-btn">Donate Now</a>
+            </nav>
+        </div>
     </header>
+
+    <section class="hero">
+        <h1>Protecting the Future, One Neighborhood at a Time.</h1>
+        <p>KKS provides families with real-time data, educational workshops, and community-led safety initiatives.</p>
+    </section>
 
     <div class="container">
         <main>
-            <h2>Latest Discussions</h2>
-            <div class="post">
-                <h3>1840 Penny Black: Variance in Gum Texture?</h3>
-                <p>Posted by <em>StampCollector42</em> - 2 hours ago</p>
-                <p>I've noticed a slight ripple in the adhesive of the 1840 series. Has anyone else seen this in the London prints, or is it environmental damage?</p>
-            </div>
-            <div class="post">
-                <h3>Tips for Safely Removing Hinges</h3>
-                <p>Posted by <em>DriftwoodLover</em> - 5 hours ago</p>
-                <p>Avoid using steam. I recommend a specialized solvent and a steady hand...</p>
-            </div>
+            <section class="content-card">
+                <h2>Latest Safety Alerts</h2>
+                <p>Our database is updated every 15 minutes with verified community reports. Stay informed about your surroundings.</p>
+                <div class="alert-item"><strong>Sector 7G:</strong> Increased patrol presence requested near High St.</div>
+                <div class="alert-item"><strong>Sector 12B:</strong> New community watch leader appointed.</div>
+            </section>
         </main>
 
         <aside>
-            <div class="featured-box">
-                <h4>FEATURED ACQUISITION</h4>
-                <p>(Members Only)</p>
-                <!-- The "Impossible Stamp" -->
-                <div id="trigger-stamp" class="stamp-image">
-                    <div class="stamp-silhouette">
-                        <span class="shh-icon">🤫</span>
-                        <div class="stamp-text">SECRETA</div>
-                        <div class="stamp-year">19XX</div>
-                    </div>
+            <div class="sidebar-card">
+                <h3>Support Our Mission</h3>
+                <p>Help us reach our goal for the New Year's Safety Initiative.</p>
+                
+                <!-- THE CLUE: The Math is wrong. Raised $4,200 of $10,000, but bar is at 88%. -->
+                <div class="progress-container" id="secret-trigger">
+                    <div class="progress-bar" style="width: 88%;"></div>
                 </div>
-                <p class="caption">Item #404-B: "The Silent Messenger"</p>
+                <div class="stats">
+                    <span>Raised: <strong>$4,200</strong></span>
+                    <span>Goal: <strong>$10,000</strong></span>
+                </div>
+                <p class="hint-text">The numbers don't add up... for a reason.</p>
             </div>
         </aside>
     </div>
 
-    <!-- Hidden portal container (starts invisible) -->
+    <!-- The Hidden Portal -->
     <div id="dark-portal" class="hidden">
-        <div class="access-box">
-            <h2>ACCESS GRANTED</h2>
-            <p>Enter Credentials for the Black Market Node</p>
-            <input type="password" placeholder="Keycode...">
+        <div class="portal-content">
+            <div class="glitch-text" data-text="THE PLAYGROUND">THE PLAYGROUND</div>
+            <p>Awaiting Handshake...</p>
+            <input type="password" id="pass-input" placeholder="ACCESS KEY">
         </div>
     </div>
 
     <script>
-        // The Hidden Logic: Hover for 5 seconds to trigger
-        const stamp = document.getElementById('trigger-stamp');
+        const trigger = document.getElementById('secret-trigger');
         const portal = document.getElementById('dark-portal');
-        let hoverTimer;
-
-        stamp.addEventListener('mouseenter', () => {
-            hoverTimer = setTimeout(() => {
+        
+        // Interaction: Click the "88%" progress bar 3 times to open the backdoor
+        let clicks = 0;
+        trigger.addEventListener('click', () => {
+            clicks++;
+            if (clicks === 3) {
                 portal.classList.add('visible');
-                console.log("The hero has found the backdoor.");
-            }, 5000); // 5 seconds hover
-        });
-
-        stamp.addEventListener('mouseleave', () => {
-            clearTimeout(hoverTimer);
+            }
         });
     </script>
 </body>
