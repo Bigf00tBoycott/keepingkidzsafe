@@ -2,79 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keeping Kidz Safe | Building Secure Communities</title>
+    <title>Keeping Kidz Safe | Community Protection</title>
+    <!-- Use the exact name of your CSS file below -->
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <header>
         <div class="nav-container">
             <div class="logo">KEEPING<span>KIDZ</span>SAFE</div>
             <nav>
-                <a href="#">Our Mission</a>
-                <a href="#">Resources</a>
                 <a href="#">Safety Map</a>
+                <a href="#">Resources</a>
                 <a href="#" class="donate-btn">Donate Now</a>
             </nav>
         </div>
     </header>
 
-    <section class="hero">
-        <h1>Protecting the Future, One Neighborhood at a Time.</h1>
-        <p>KKS provides families with real-time data, educational workshops, and community-led safety initiatives.</p>
-    </section>
+    <div class="hero">
+        <h1>Vigilance is the first step to safety.</h1>
+        <p>Join over 10,000 parents in our national monitoring network.</p>
+    </div>
 
-    <div class="container">
-        <main>
-            <section class="content-card">
-                <h2>Latest Safety Alerts</h2>
-                <p>Our database is updated every 15 minutes with verified community reports. Stay informed about your surroundings.</p>
-                <div class="alert-item"><strong>Sector 7G:</strong> Increased patrol presence requested near High St.</div>
-                <div class="alert-item"><strong>Sector 12B:</strong> New community watch leader appointed.</div>
-            </section>
-        </main>
+    <div class="main-layout">
+        <section class="card">
+            <h2>Local Safety Index</h2>
+            <div class="alert"><strong>Alert:</strong> High activity reported in Sector 4.</div>
+            <div class="alert"><strong>Update:</strong> Patrols increased in North District.</div>
+        </section>
 
-        <aside>
-            <div class="sidebar-card">
-                <h3>Support Our Mission</h3>
-                <p>Help us reach our goal for the New Year's Safety Initiative.</p>
-                
-                <!-- THE CLUE: The Math is wrong. Raised $4,200 of $10,000, but bar is at 88%. -->
-                <div class="progress-container" id="secret-trigger">
-                    <div class="progress-bar" style="width: 88%;"></div>
-                </div>
-                <div class="stats">
-                    <span>Raised: <strong>$4,200</strong></span>
-                    <span>Goal: <strong>$10,000</strong></span>
-                </div>
-                <p class="hint-text">The numbers don't add up... for a reason.</p>
+        <aside class="card">
+            <h3>Mission Progress</h3>
+            <!-- THE CLUE: $4200/$10000 is 42%, but the bar says 88% -->
+            <div class="progress-bg" id="backdoor">
+                <div class="progress-fill" style="width: 88%;"></div>
             </div>
+            <p>Raised: $4,200 / Goal: $10,000</p>
         </aside>
     </div>
 
-    <!-- The Hidden Portal -->
-    <div id="dark-portal" class="hidden">
-        <div class="portal-content">
-            <div class="glitch-text" data-text="THE PLAYGROUND">THE PLAYGROUND</div>
-            <p>Awaiting Handshake...</p>
-            <input type="password" id="pass-input" placeholder="ACCESS KEY">
-        </div>
+    <div id="dark-portal">
+        <h1>ACCESS GRANTED</h1>
+        <p>Awaiting handshake...</p>
+        <input type="password" placeholder="Keycode">
     </div>
 
     <script>
-        const trigger = document.getElementById('secret-trigger');
+        const trigger = document.getElementById('backdoor');
         const portal = document.getElementById('dark-portal');
-        
-        // Interaction: Click the "88%" progress bar 3 times to open the backdoor
-        let clicks = 0;
-        trigger.addEventListener('click', () => {
-            clicks++;
-            if (clicks === 3) {
-                portal.classList.add('visible');
-            }
-        });
+        let count = 0;
+        trigger.onclick = () => {
+            count++;
+            if(count === 3) portal.style.display = 'flex';
+        }
     </script>
 </body>
 </html>
