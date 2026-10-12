@@ -1,30 +1,12 @@
-(function () {
-  const menuBtn = document.querySelector('[data-menu-btn]');
-  const nav = document.querySelector('nav');
-  if (menuBtn && nav) {
-    menuBtn.addEventListener('click', () => nav.classList.toggle('open'));
-  }
-
-  document.querySelectorAll('.accordion-trigger').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      btn.parentElement.classList.toggle('open');
-    });
-  });
-
-  const checklist = document.querySelector('[data-checklist]');
-  if (checklist) {
-    const boxes = checklist.querySelectorAll('input[type="checkbox"]');
-    const progress = document.querySelector('[data-progress]');
-    const summary = document.querySelector('[data-progress-text]');
-
-    const update = () => {
-      const done = Array.from(boxes).filter((b) => b.checked).length;
-      const pct = Math.round((done / boxes.length) * 100);
-      if (progress) progress.style.width = `${pct}%`;
-      if (summary) summary.textContent = `${done}/${boxes.length} safety steps complete`;
-    };
-
-    boxes.forEach((b) => b.addEventListener('change', update));
-    update();
-  }
+(() => {
+const menu = document.querySelector('.menu');
+const nav = document.querySelector('nav');
+if (menu && nav) menu.addEventListener('click', () => { const open = menu.getAttribute('aria-expanded') !== 'true'; menu.setAttribute('aria-expanded', String(open)); nav.classList.toggle('open', open); });
+const boxes = [...document.querySelectorAll('.checklist-panel input')];
+const progress = document.querySelector('progress');
+const summary = document.querySelector('[data-progress]');
+const update = () => { const count = boxes.filter(box => box.checked).length; if (progress) progress.value = count; if (summary) summary.textContent = `${count} of ${boxes.length} steps checked`; };
+boxes.forEach(box => box.addEventListener('change', update));
+update();
+document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
 })();
